@@ -18,9 +18,6 @@
 		height: 350,
 		skinUrl: "<?php echo "https://labs.blw.moe/mcsanta/tmp/".$user; ?>-santa.png"
 	});
-	// By default, the skin model is automatically detected. You can turn it off in this way:
-	// skinViewer.detectModel = false;
-	// skinViewer.playerObject.skin.slim = true;
 	let control = new skinview3d.createOrbitControls(skinViewer);
 	skinViewer.animation = new skinview3d.CompositeAnimation();
 	let walk = skinViewer.animation.add(skinview3d.WalkingAnimation);

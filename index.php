@@ -12,37 +12,46 @@
 	<style>.center{text-align:center}</style>
 </head>
 <body>
+	<noscript>您的浏览器不支持 JavaScript，请更换浏览器访问此网页！</noscript>
 	<div class="ui container center" style="padding-top:20px;">
 		<h1>为你的 Minecraft 角色添加一顶圣诞帽吧！</h1><br>
 	</div>
-	
-		<?php
-			if (isset($_GET['user']) && ! empty($_GET['user'])) {
-				$user = $_GET['user'];
-				require('process.php');
-			}
-		if (isset($_GET['user']) && $_GET['user'] != "") {
-			if (!preg_match("/^[\w]{3,16}$/", $_GET['user'])) {
-			    header("Location: /mcsanta/?error=char");
-			    die();
-			}
-			$user = $_GET['user'];
-			$error = false;
-			if ($error !== false)
-			{
-				die();
-			}
-			include './requires/show.php';
+	<?php
+	if (isset($_GET['file']) && !empty($_GET['file'])) {
+		if (!preg_match("/^[0-9]*$/", $_GET['file'])) {
+			die("<p class=\"center\">请输入正确的参数！</p>");
 		}
-		else {
-			include './requires/post.php';
+		$user = $_GET['file'];
+		include './requires/show.php';
+		die();
+	}
+	if (isset($_GET['user']) && !empty($_GET['user'])) {
+		$user = $_GET['user'];
+		require ('process.php');
+	}
+	if (isset($_GET['user']) && $_GET['user'] != "") {
+		if (!preg_match("/^[\w]{3,16}$/", $_GET['user'])) {
+			header("Location: /mcsanta/?error=char");
+			die();
 		}
-		if (isset($_GET['error'])) {
-		  echo '<section id="error">';
-			  if ($_GET['error'] == "char") { echo "请检查用户名格式"; }
-			  else { echo "发生了一个未知错误，请稍后再试";}
-		  echo '</section>';
-		} 
-?>
+		$user = $_GET['user'];
+		$error = false;
+		if ($error !== false) {
+			die();
+		}
+		include './requires/show.php';
+	} else {
+		include './requires/post.php';
+	}
+	if (isset($_GET['error'])) {
+		echo '<section id="error">';
+		if ($_GET['error'] == "char") {
+			echo "请检查用户名格式";
+		} else {
+			echo "发生了一个未知错误，请稍后再试";
+		}
+		echo '</section>';
+	}
+	?>
 </body>
 </html>
